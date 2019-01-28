@@ -1,5 +1,11 @@
 # Venia Consumer Example
 
+[![image](https://user-images.githubusercontent.com/1643758/51866627-111b6380-230f-11e9-83d3-d154b5e6194c.png)](https://venia-consuming-app.now.sh)
+
+https://venia-consuming-app.now.sh/
+
+A build artifact is inspectable at https://venia-consuming-app.now.sh/_src . Check it out!
+
 This simple app demonstrates Venia components in use in two routes, with live Magento data coming from a proxied backend in one case, and custom data fed to a presentational component in the other case.
 
 Here is how you consume Venia components:
@@ -24,6 +30,8 @@ function App () => (
 
 **OR**, use your build tool (Webpack, Rollup, etc) to override the Venia **drivers component** with your own implementation of query, routing, URL building and linking modules.
 
+**webpack.config.js:**
+
 ```js
   module: {
     alias: {
@@ -31,6 +39,30 @@ function App () => (
     }
   }
 }
+```
+
+**./myReplacementDrivers:**
+
+```js
+import React, { Component } from 'react';
+
+// A fake query that loads forever
+export class Query extends Component {
+  render() {
+    return this.props.children({ loading: true });
+  }
+}
+
+// A fake Link that doesn't use the client-side router
+export class Link extends Component {
+  render() {
+    const { children, to, ...other } = this.props;
+    return <a {...other} href={to}>{children}</a>;
+  }
+}
+
+// You can also override Router, Route, Redirect, ResourceUrl, and react-redux's
+// `connect()` HOC
 ```
 
 Then, you can override "deep dependencies", such as leaf nodes of Venia components using React Router Link elements.

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "name": "venia-consuming-app",
-  "alias": "venia-consuming-app",
+  "name": "venia-consumer-example",
+  "alias": "venia-consumer-example",
+  "public": true,
   "routes": [
-      {"src": "^graphql", "dest": "https://magento-venia.now.sh/graphql"},
+      {"src": "^/graphql", "dest": "https://release-dev-rxvv2iq-zddsyhrdimyra.us-4.magentosite.cloud/graphql"},
       {"src": "^/static/(.*)", "dest": "/build/static/$1"},
       {"src": "^/favicon.ico", "dest": "/build/favicon.ico"},
       {"src": "^/asset-manifest.json", "dest": "/build/asset-manifest.json"},
@@ -13,6 +14,6 @@
       {"src": "^/$", "dest": "/build/index.html"},
       {"src": "^/[\\w]+$", "dest": "/build/index.html"},
       {"src": "^/.*\\.html", "dest": "/build/index.html"},
-      {"src": "^/(.*)", "dest": "https://magento-venia.now.sh/$1"}
+      {"src": "^/(.*)", "dest": "https://release-dev-rxvv2iq-zddsyhrdimyra.us-4.magentosite.cloud/$1"}
   ]
 }
