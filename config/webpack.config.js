@@ -266,7 +266,7 @@ module.exports = function(webpackEnv) {
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
         // Inject our own dependencies so we can load Venia independently
-        
+        '@magento-venia/drivers': path.join(paths.appSrc, 'veniaDrivers.js')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -332,11 +332,12 @@ module.exports = function(webpackEnv) {
               test: /\.js$/,
               include: [/@magento/, /pwa-studio/],
               loader: require.resolve('babel-loader'),
-              sideEffects: false,
               options: {
-                // customize: require.resolve(
-                //   'babel-preset-react-app/webpack-overrides'
-                // ),
+                babelrc: false,
+                configFile: false,
+                customize: require.resolve(
+                  'babel-preset-react-app/webpack-overrides'
+                ),
                 plugins: [
                   require.resolve('@babel/plugin-proposal-class-properties'),
                   require.resolve('@babel/plugin-syntax-dynamic-import'),

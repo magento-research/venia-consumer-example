@@ -1,39 +1,69 @@
-import React, { Component } from 'react';
-import './App.css';
-import VeniaProductDetail from '@magento/venia-concept/es2015/components/ProductFullDetail';
-import { Notification } from 'react-notification'
+import React, { Component, Fragment } from "react";
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  NavLink
+} from "react-router-dom";
+import classes from "./App.css";
+import Presentational from "./Presentational";
+import Container, { EXAMPLE_URL } from "./Container";
 
-class App extends Component {
-  state = {}
-  componentDidMount() {
-    this.getProduct('https://gist.githubusercontent.com/zetlen/0b27881fe7dd26b5c79cfdf548043ad1/raw/dd16d1533fbfa1e84f9e3d85e75c3efb2c8ba640/silver-amor-bangle-set.json');
-  }
-  async getProduct(url) {
-    const res = await fetch(url);
-    this.setState({ product: await res.json() });
-  }
+export default class App extends Component {
   render() {
-    const { product, added } = this.state;
-    const notification = added ? <Notification message={`Added ${added} to cart!`} action="Cool" dismissAfter={3000} onDismiss={() => this.setState({ added: false })} /> : null;
-    const productDetail = product ? <VeniaProductDetail
-        product={product} addToCart={() => this.setState({ added: product.name })} /> : null;
     return (
-      <div className="App">
-        <header className="App-header">
-          <p> Oh look, it's a <a
-            className="App-link"
-            href="https://facebook.github.io/create-react-app/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            create-react-app
-          </a> starter using a Venia component.</p>
-        </header>
-        {notification}
-        {productDetail}
-      </div>
+      <Router>
+        <div className={classes.app}>
+          <header className={classes.header}>
+            <h1 className={classes.title}>Imported Venia Components</h1>
+            <nav className={classes.nav}>
+              <NavLink
+                className={classes.link}
+                activeClassName={classes.active}
+                to="/presentational"
+              >
+                Presentational
+              </NavLink>
+              <NavLink
+                className={classes.link}
+                activeClassName={classes.active}
+                to={EXAMPLE_URL}
+              >
+                Root
+              </NavLink>
+            </nav>
+          </header>
+
+          <Route
+            exact
+            path="/"
+            render={() => <Redirect to="/presentational" />}
+          />
+          <Route
+            path="/presentational"
+            render={() => (
+              <Fragment>
+                <p className={classes.heading}>
+                  <code>ProductFullDetail</code> component displaying static
+                  data
+                </p>
+                <Presentational />
+              </Fragment>
+            )}
+          />
+          <Route
+            path={EXAMPLE_URL}
+            render={() => (
+              <Fragment>
+                <p className={classes.heading}>
+                  <code>Product</code> root component querying Magento data using `drivers` override
+                </p>
+                <Container />
+              </Fragment>
+            )}
+          />
+        </div>
+      </Router>
     );
   }
 }
-
-export default App;

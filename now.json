@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "name": "venia-consuming-app",
+  "alias": "venia-consuming-app",
+  "routes": [
+      {"src": "^graphql", "dest": "https://magento-venia.now.sh/graphql"},
+      {"src": "^/static/(.*)", "dest": "/build/static/$1"},
+      {"src": "^/favicon.ico", "dest": "/build/favicon.ico"},
+      {"src": "^/asset-manifest.json", "dest": "/build/asset-manifest.json"},
+      {"src": "^/manifest.json", "dest": "/build/manifest.json"},
+      {"src": "^/service-worker.js", "headers": {"cache-control": "s-maxage=0"}, "dest": "/build/service-worker.js"},
+      {"src": "^/precache-manifest.(.*)", "dest": "/build/precache-manifest.$1"},
+      {"src": "^/$", "dest": "/build/index.html"},
+      {"src": "^/[\\w]+$", "dest": "/build/index.html"},
+      {"src": "^/.*\\.html", "dest": "/build/index.html"},
+      {"src": "^/(.*)", "dest": "https://magento-venia.now.sh/$1"}
+  ]
+}

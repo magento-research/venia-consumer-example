@@ -50,6 +50,7 @@ const moduleFileExtensions = [
   'json',
   'web.jsx',
   'jsx',
+  'graphql'
 ];
 
 // Resolve file paths in the same order as webpack

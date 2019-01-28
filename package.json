@@ -1,5 +1,5 @@
 {
-  "name": "react-app-using-venia",
+  "name": "@magento/venia-consumer-example",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -10,7 +10,10 @@
     "@babel/plugin-transform-react-jsx": "^7.2.0",
     "@magento/pwa-buildpack": "^2.0.0-rc.18",
     "@magento/venia-concept": "^2.0.0-rc.18",
+    "@material-ui/core": "^3.9.1",
+    "@material-ui/icons": "^3.0.2",
     "@svgr/webpack": "2.4.1",
+    "apollo-boost": "^0.1.27",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
@@ -33,6 +36,7 @@
     "file-loader": "2.0.0",
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.0",
+    "graphql": "^14.1.1",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
@@ -46,10 +50,11 @@
     "postcss-preset-env": "6.3.1",
     "postcss-safe-parser": "4.0.1",
     "react": "^16.7.0",
+    "react-apollo": "^2.4.0",
     "react-app-polyfill": "^0.2.0",
     "react-dev-utils": "^7.0.1",
     "react-dom": "^16.7.0",
-    "react-notification": "^6.8.4",
+    "react-router-dom": "^4.3.1",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
@@ -63,6 +68,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
+    "now-build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -122,5 +128,6 @@
     "plugins": [
       "@babel/plugin-proposal-class-properties"
     ]
-  }
+  },
+  "proxy": "https://magento-venia.now.sh"
 }
