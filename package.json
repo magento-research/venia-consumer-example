@@ -8,7 +8,6 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-syntax-jsx": "^7.2.0",
     "@babel/plugin-transform-react-jsx": "^7.2.0",
-    "@magento/pwa-buildpack": "^2.0.0-rc.18",
     "@magento/venia-concept": "^2.0.0-rc.18",
     "@material-ui/core": "^3.9.1",
     "@material-ui/icons": "^3.0.2",

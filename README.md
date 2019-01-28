@@ -1,3 +1,42 @@
+# Venia Consumer Example
+
+This simple app demonstrates Venia components in use in two routes, with live Magento data coming from a proxied backend in one case, and custom data fed to a presentational component in the other case.
+
+Here is how you consume Venia components:
+
+1. Install Venia in your project with npm `npm install @magento/venia-concept` or yarn `yarn add @magento/venia-concept`.
+
+1. Import individual Venia components from the `esm` directory of the Venia package. These files are ES Modules, so Webpack can optimize them with tree-sharking.
+
+```js
+import VeniaProductDetail from '@magento/venia-concept/esm/components/ProductFullDetail';
+import Product from '@magento/venia-concept/esm/RootComponents/Product'
+```
+
+1. To make Venia components work reliably, you should either surround them with a Venia Adapter:
+
+```js
+import VeniaAdapter from '@magento/venia-concept/esm/drivers/adapter';
+function App () => (
+  <VeniaAdapter store={yourOwnStore} client={yourOwnClient}
+)
+```
+
+**OR**, use your build tool (Webpack, Rollup, etc) to override the Venia **drivers component** with your own implementation of query, routing, URL building and linking modules.
+
+```js
+  module: {
+    alias: {
+      "@magento-venia/drivers": "./myReplacementDrivers"
+    }
+  }
+}
+```
+
+Then, you can override "deep dependencies", such as leaf nodes of Venia components using React Router Link elements.
+
+Below are the general-purpose instructions for `create-react-app` projects. Bear in mind that this project is 'ejected'!
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
