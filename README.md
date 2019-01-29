@@ -35,7 +35,7 @@ function App () => (
 ```js
   module: {
     alias: {
-      "@magento-venia/drivers": "./myReplacementDrivers"
+      "@magento/venia-drivers": "./myReplacementDrivers"
     }
   }
 }
@@ -46,14 +46,14 @@ function App () => (
 ```js
 import React, { Component } from 'react';
 
-// A fake query that loads forever
+// A replacement Query that loads forever
 export class Query extends Component {
   render() {
     return this.props.children({ loading: true });
   }
 }
 
-// A fake Link that doesn't use the client-side router
+// A replacement Link that doesn't use the client-side router
 export class Link extends Component {
   render() {
     const { children, to, ...other } = this.props;
@@ -61,7 +61,21 @@ export class Link extends Component {
   }
 }
 
-// You can also override Router, Route, Redirect, ResourceUrl, and react-redux's
+// A replacement resourceUrl that validates urls and appends a query string
+export function resourceUrl(href) {
+  let url;
+  try {
+    url = new window.URL(href);
+  } catch (e) {
+    url = new window.URL(href, window.location.origin);
+  }
+  const params = new URLSearchParams(url.search);
+  params.append('referrer', window.location.hostname);
+  url.search = `?${params}`;
+  return url.href;
+}
+
+// You can also override Router, Route, Redirect, and react-redux's
 // `connect()` HOC
 ```
 

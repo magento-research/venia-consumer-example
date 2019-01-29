@@ -27,15 +27,15 @@ export class Link extends Component {
     );
   }
 }
-export class ResourceUrl {
-  constructor(url) {
-    try {
-      this.url = new window.URL(url);
-    } catch (e) {
-      this.url = new window.URL(url, window.location.origin);
-    }
+export function resourceUrl(href) {
+  let url;
+  try {
+    url = new window.URL(href);
+  } catch (e) {
+    url = new window.URL(href, window.location.origin);
   }
-  toString() {
-    return this.url;
-  }
+  const params = new URLSearchParams(url.search);
+  params.append('referrer', window.location.hostname);
+  url.search = `?${params}`;
+  return url.href;
 }
