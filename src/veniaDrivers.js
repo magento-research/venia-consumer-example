@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import ApolloClient from "apollo-boost";
-import { Query as ApolloQuery } from "react-apollo";
+import {
+  Query as VeniaQuery,
+  resourceUrl as veniaResourceUrl
+} from "@magento/venia-concept/esm/drivers";
 
 const client = new ApolloClient({
   uri: "/graphql"
@@ -13,7 +16,7 @@ export function connect() {
 
 export class Query extends Component {
   render() {
-    return <ApolloQuery client={client} {...this.props} />;
+    return <VeniaQuery client={client} {...this.props} />;
   }
 }
 
@@ -27,15 +30,19 @@ export class Link extends Component {
     );
   }
 }
-export function resourceUrl(href) {
-  let url;
+export function resourceUrl(href, opts = {}, ...rest) {
+  let url = veniaResourceUrl(href, opts, ...rest);
   try {
-    url = new window.URL(href);
+    url = new window.URL(url);
   } catch (e) {
-    url = new window.URL(href, window.location.origin);
+    const isImage = opts.type && opts.type.startsWith("image");
+    const base = isImage
+      ? process.env.REACT_APP_VENIA_BASE_DOMAIN
+      : window.location.origin;
+    url = new window.URL(url, base);
   }
   const params = new URLSearchParams(url.search);
-  params.append('referrer', window.location.hostname);
+  params.append("referrer", window.location.hostname);
   url.search = `?${params}`;
   return url.href;
 }

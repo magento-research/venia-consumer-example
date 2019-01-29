@@ -45,6 +45,7 @@ function App () => (
 
 ```js
 import React, { Component } from 'react';
+import { resourceUrl as veniaResourceUrl } from '@magento/venia-concept/esm/drivers';
 
 // A replacement Query that loads forever
 export class Query extends Component {
@@ -61,13 +62,14 @@ export class Link extends Component {
   }
 }
 
-// A replacement resourceUrl that validates urls and appends a query string
-export function resourceUrl(href) {
-  let url;
+// A replacement resourceUrl that calls Venia's implementation by importing
+// Venia's default driver, then additionally validates urls and adds a parameter
+export function resourceUrl(...args) {
+  let url = veniaResourceUrl(...args);
   try {
-    url = new window.URL(href);
+    url = new window.URL(url);
   } catch (e) {
-    url = new window.URL(href, window.location.origin);
+    url = new window.URL(url, window.location.origin);
   }
   const params = new URLSearchParams(url.search);
   params.append('referrer', window.location.hostname);
