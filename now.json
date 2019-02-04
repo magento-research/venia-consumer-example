@@ -4,7 +4,7 @@
   "alias": "venia-consumer-example",
   "public": true,
   "routes": [
-      {"src": "^/graphql", "dest": "https://release-dev-rxvv2iq-zddsyhrdimyra.us-4.magentosite.cloud/graphql"},
+      {"src": "^/graphql", "dest": "https://release-dev-rxvv2iq-zddsyhrdimyra.us-4.magentosite.cloud"},
       {"src": "^/static/(.*)", "dest": "/build/static/$1"},
       {"src": "^/favicon.ico", "dest": "/build/favicon.ico"},
       {"src": "^/asset-manifest.json", "dest": "/build/asset-manifest.json"},
