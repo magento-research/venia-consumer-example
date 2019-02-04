@@ -1,10 +1,10 @@
 # Venia Consumer Example
 
-[![image](https://user-images.githubusercontent.com/1643758/51866627-111b6380-230f-11e9-83d3-d154b5e6194c.png)](https://venia-consuming-app.now.sh)
+[![image](https://user-images.githubusercontent.com/1643758/51866627-111b6380-230f-11e9-83d3-d154b5e6194c.png)](https://venia-consumer-example.now.sh)
 
-https://venia-consuming-app.now.sh/
+https://venia-consumer-example.now.sh/
 
-A build artifact is inspectable at https://venia-consuming-app.now.sh/_src . Check it out!
+A build artifact is inspectable at https://venia-consumer-example.now.sh/_src . Check it out!
 
 This simple app demonstrates Venia components in use in two routes, with live Magento data coming from a proxied backend in one case, and custom data fed to a presentational component in the other case.
 
